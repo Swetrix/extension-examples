@@ -1,11 +1,11 @@
 (async (sdk) => {
-  function convertCustomsToTree(obj) {
+  function convertCustomsToTree(obj, separator) {
     const result = {}
   
     for (const key in obj) {
       let currentNode = result
   
-      const parts = key.split('_')
+      const parts = key.split(separator)
       for (let i = 0; i < parts.length; i++) {
         const part = parts[i]
         const isLastPart = i === parts.length - 1
@@ -53,7 +53,7 @@
   }
 
   const generateHTML = (customs, theme) => {
-    const tree = convertCustomsToTree(customs, '_')
+    const tree = convertCustomsToTree(customs, '__')
     const treeHTML = convertTreeToHTML(tree)
     const styles = `
       ul, #customs_tree {
